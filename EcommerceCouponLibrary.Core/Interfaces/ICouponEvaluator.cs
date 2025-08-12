@@ -50,5 +50,20 @@ namespace EcommerceCouponLibrary.Core.Interfaces
         /// <param name="order">The order</param>
         /// <returns>The order totals</returns>
         OrderTotals GetOrderTotals(Order order);
+
+        /// <summary>
+        /// Gets a breakdown of discounts applied to an order
+        /// </summary>
+        /// <param name="order">The order</param>
+        /// <returns>The discount breakdown</returns>
+        DiscountBreakdown GetDiscountBreakdown(Order order);
+
+        /// <summary>
+        /// Gets items that would be eligible for a specific coupon
+        /// </summary>
+        /// <param name="order">The order</param>
+        /// <param name="couponCode">The coupon code</param>
+        /// <returns>List of eligible items</returns>
+        IEnumerable<OrderItem> GetEligibleItems(Order order, string couponCode);
     }
 }

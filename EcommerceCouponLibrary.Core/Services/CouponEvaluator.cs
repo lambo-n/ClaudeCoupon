@@ -60,14 +60,8 @@ namespace EcommerceCouponLibrary.Core.Services
 
             // Calculate the discount
             var discountCalculation = CalculateDiscount(coupon, order);
-            if (discountCalculation.DiscountAmount.IsZero)
-            {
-                return CouponApplicationResult.Failure(
-                    coupon,
-                    CouponRejectionReason.NoEligibleItems,
-                    "This coupon doesn't apply to any items in your cart."
-                );
-            }
+            // Note: We allow zero discount coupons to be applied for U-003 functionality
+            // This allows shoppers to see which items would be affected even if no savings occur
 
             // Apply the coupon to the order
             order.ApplyCoupon(coupon, discountCalculation.DiscountAmount);
@@ -239,6 +233,59 @@ namespace EcommerceCouponLibrary.Core.Services
                 FinalTotal = order.Total,
                 CurrencyCode = order.CurrencyCode
             };
+        }
+
+        /// <summary>
+        /// Gets a breakdown of discounts applied to an order
+        /// </summary>
+        /// <param name="order">The order</param>
+        /// <returns>The discount breakdown</returns>
+        public DiscountBreakdown GetDiscountBreakdown(Order order)
+        {
+            if (order == null)
+                throw new ArgumentNullException(nameof(order));
+
+            var breakdown = new DiscountBreakdown
+            {
+                CurrencyCode = order.CurrencyCode,
+                NonDiscountedItemCount = order.Items.Count - order.AppliedCoupons.Sum(ac => 
+                    ac.Coupon.Type == CouponType.Percentage || ac.Coupon.Type == CouponType.FixedAmount ? 1 : 0)
+            };
+
+            // For now, we'll create line discounts based on the applied coupons
+            // In a more sophisticated implementation, this would be stored with the order
+            foreach (var appliedCoupon in order.AppliedCoupons)
+            {
+                var lineDiscounts = CalculateLineDiscountsForCoupon(appliedCoupon, order);
+                breakdown.LineDiscounts.AddRange(lineDiscounts);
+            }
+
+            return breakdown;
+        }
+
+        /// <summary>
+        /// Gets items that would be eligible for a specific coupon
+        /// </summary>
+        /// <param name="order">The order</param>
+        /// <param name="couponCode">The coupon code</param>
+        /// <returns>List of eligible items</returns>
+        public IEnumerable<OrderItem> GetEligibleItems(Order order, string couponCode)
+        {
+            if (order == null)
+                throw new ArgumentNullException(nameof(order));
+
+            if (string.IsNullOrWhiteSpace(couponCode))
+                return Enumerable.Empty<OrderItem>();
+
+            // Normalize the coupon code
+            var normalizedCode = couponCode.Trim().ToUpperInvariant();
+
+            // Get the coupon from the repository
+            var coupon = _couponRepository.GetByCodeAsync(normalizedCode).Result;
+            if (coupon == null)
+                return Enumerable.Empty<OrderItem>();
+
+            return GetEligibleItems(coupon, order);
         }
 
         /// <summary>
@@ -463,6 +510,21 @@ namespace EcommerceCouponLibrary.Core.Services
         {
             public Money DiscountAmount { get; set; }
             public List<LineDiscount> LineDiscounts { get; set; } = new();
+        }
+
+        /// <summary>
+        /// Calculates line discounts for an already applied coupon
+        /// </summary>
+        /// <param name="appliedCoupon">The applied coupon</param>
+        /// <param name="order">The order</param>
+        /// <returns>List of line discounts</returns>
+        private List<LineDiscount> CalculateLineDiscountsForCoupon(AppliedCoupon appliedCoupon, Order order)
+        {
+            var eligibleItems = GetEligibleItems(appliedCoupon.Coupon, order);
+            if (!eligibleItems.Any())
+                return new List<LineDiscount>();
+
+            return AllocateDiscountToItems(eligibleItems, appliedCoupon.DiscountAmount);
         }
     }
 }

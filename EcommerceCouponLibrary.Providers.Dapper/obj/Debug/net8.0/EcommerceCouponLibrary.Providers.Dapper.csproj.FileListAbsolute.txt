@@ -1,0 +1,16 @@
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.Dapper/bin/Debug/net8.0/EcommerceCouponLibrary.Providers.Dapper.deps.json
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.Dapper/bin/Debug/net8.0/EcommerceCouponLibrary.Providers.Dapper.dll
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.Dapper/bin/Debug/net8.0/EcommerceCouponLibrary.Providers.Dapper.pdb
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.Dapper/bin/Debug/net8.0/EcommerceCouponLibrary.Core.dll
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.Dapper/bin/Debug/net8.0/EcommerceCouponLibrary.Core.pdb
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.Dapper/obj/Debug/net8.0/EcommerceCouponLibrary.Providers.Dapper.csproj.AssemblyReference.cache
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.Dapper/obj/Debug/net8.0/EcommerceCouponLibrary.Providers.Dapper.GeneratedMSBuildEditorConfig.editorconfig
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.Dapper/obj/Debug/net8.0/EcommerceCouponLibrary.Providers.Dapper.AssemblyInfoInputs.cache
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.Dapper/obj/Debug/net8.0/EcommerceCouponLibrary.Providers.Dapper.AssemblyInfo.cs
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.Dapper/obj/Debug/net8.0/EcommerceCouponLibrary.Providers.Dapper.csproj.CoreCompileInputs.cache
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.Dapper/obj/Debug/net8.0/EcommerceCouponLibrary.Providers.Dapper.sourcelink.json
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.Dapper/obj/Debug/net8.0/EcommerceCouponLibrary.Providers.Dapper.csproj.CopyComplete
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.Dapper/obj/Debug/net8.0/EcommerceCouponLibrary.Providers.Dapper.dll
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.Dapper/obj/Debug/net8.0/refint/EcommerceCouponLibrary.Providers.Dapper.dll
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.Dapper/obj/Debug/net8.0/EcommerceCouponLibrary.Providers.Dapper.pdb
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.Dapper/obj/Debug/net8.0/ref/EcommerceCouponLibrary.Providers.Dapper.dll

@@ -25,6 +25,21 @@ namespace EcommerceCouponLibrary.Core.Models
         public string CurrencyCode { get; set; } = "USD";
 
         /// <summary>
+        /// Shipping amount for this order
+        /// </summary>
+        public Money ShippingAmount { get; set; } = Money.USD(0m);
+
+        /// <summary>
+        /// Tax amount for this order
+        /// </summary>
+        public Money TaxAmount { get; set; } = Money.USD(0m);
+
+        /// <summary>
+        /// ISO Country code for the order/shipping destination
+        /// </summary>
+        public string CountryCode { get; set; } = string.Empty;
+
+        /// <summary>
         /// Items in the order
         /// </summary>
         public List<OrderItem> Items { get; set; } = new();
@@ -47,7 +62,7 @@ namespace EcommerceCouponLibrary.Core.Models
         /// <summary>
         /// Final total after all discounts
         /// </summary>
-        public Money Total => Subtotal - TotalDiscount;
+        public Money Total => Money.Create(Subtotal.Amount + ShippingAmount.Amount + TaxAmount.Amount, CurrencyCode) - TotalDiscount;
 
         /// <summary>
         /// Date when the order was created

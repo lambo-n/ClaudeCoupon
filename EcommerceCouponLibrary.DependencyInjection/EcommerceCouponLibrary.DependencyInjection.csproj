@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EcommerceCouponLibrary.Core\EcommerceCouponLibrary.Core.csproj" />
+    <ProjectReference Include="..\EcommerceCouponLibrary.Providers.InMemory\EcommerceCouponLibrary.Providers.InMemory.csproj" />
+    <ProjectReference Include="..\EcommerceCouponLibrary.Providers.EfCore\EcommerceCouponLibrary.Providers.EfCore.csproj" />
+    <ProjectReference Include="..\EcommerceCouponLibrary.Providers.Mongo\EcommerceCouponLibrary.Providers.Mongo.csproj" />
+    <ProjectReference Include="..\EcommerceCouponLibrary.Providers.Dapper\EcommerceCouponLibrary.Providers.Dapper.csproj" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
+    <PackageReference Include="MongoDB.Driver" Version="2.25.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.7" />
+  </ItemGroup>
+</Project>

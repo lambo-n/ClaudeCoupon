@@ -99,6 +99,46 @@ namespace EcommerceCouponLibrary.Core.Models
         public bool AppliesToTaxes { get; set; } = false;
 
         /// <summary>
+        /// What the discount applies to (default: merchandise only)
+        /// </summary>
+        public DiscountScope Scope { get; set; } = DiscountScope.MerchandiseOnly;
+
+        /// <summary>
+        /// Included categories for targeting (optional)
+        /// </summary>
+        public string[]? IncludedCategories { get; set; }
+
+        /// <summary>
+        /// Exclude sale items from eligibility
+        /// </summary>
+        public bool ExcludeSaleItems { get; set; } = false;
+
+        /// <summary>
+        /// Exclude gift cards from eligibility
+        /// </summary>
+        public bool ExcludeGiftCards { get; set; } = false;
+
+        /// <summary>
+        /// Whether coupon requires first order only
+        /// </summary>
+        public bool RequireFirstOrder { get; set; } = false;
+
+        /// <summary>
+        /// Allowed customer groups (optional)
+        /// </summary>
+        public string[]? AllowedCustomerGroups { get; set; }
+
+        /// <summary>
+        /// Allowed countries (ISO) for this coupon (optional)
+        /// </summary>
+        public string[]? AllowedCountries { get; set; }
+
+        /// <summary>
+        /// Allowed currencies (optional)
+        /// </summary>
+        public string[]? AllowedCurrencies { get; set; }
+
+        /// <summary>
         /// Date when the coupon was created
         /// </summary>
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
@@ -200,6 +240,23 @@ namespace EcommerceCouponLibrary.Core.Models
         /// <summary>
         /// Fixed amount discount (e.g., $5 off)
         /// </summary>
-        FixedAmount
+        FixedAmount,
+        FreeShipping
+    }
+
+    /// <summary>
+    /// Defines what the discount applies to
+    /// </summary>
+    public enum DiscountScope
+    {
+        /// <summary>
+        /// Discount applies only to merchandise (excludes shipping, taxes, etc.)
+        /// </summary>
+        MerchandiseOnly = 1,
+
+        /// <summary>
+        /// Discount applies to the entire order total (includes shipping and taxes)
+        /// </summary>
+        OrderTotal = 2
     }
 }

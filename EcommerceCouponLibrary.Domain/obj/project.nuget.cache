@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "9lFE+jlKc7Q4Q2yBN/lUicM/JK7kcMKsXA3mg2uQXdg+5W7350XZXZnsUViyqyiUB4EMYNz6DtveCbqo+hlkaQ==",
+  "success": true,
+  "projectFilePath": "/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Domain/EcommerceCouponLibrary.Domain.csproj",
+  "expectedPackageFiles": [
+    "/home/lambo/.nuget/packages/system.componentmodel.annotations/5.0.0/system.componentmodel.annotations.5.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

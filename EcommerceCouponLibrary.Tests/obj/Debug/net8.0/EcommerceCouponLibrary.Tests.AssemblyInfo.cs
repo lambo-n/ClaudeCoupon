@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EcommerceCouponLibrary.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+989d53a68735352fd442ba5da51402d74ef8f4f6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b3e25037bb6ac13a2080164104201e41f351f4ac")]
 [assembly: System.Reflection.AssemblyProductAttribute("EcommerceCouponLibrary.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EcommerceCouponLibrary.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,0 +1,16 @@
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.EfCore/bin/Debug/net8.0/EcommerceCouponLibrary.Providers.EfCore.deps.json
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.EfCore/bin/Debug/net8.0/EcommerceCouponLibrary.Providers.EfCore.dll
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.EfCore/bin/Debug/net8.0/EcommerceCouponLibrary.Providers.EfCore.pdb
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.EfCore/bin/Debug/net8.0/EcommerceCouponLibrary.Core.dll
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.EfCore/bin/Debug/net8.0/EcommerceCouponLibrary.Core.pdb
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.EfCore/obj/Debug/net8.0/EcommerceCouponLibrary.Providers.EfCore.csproj.AssemblyReference.cache
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.EfCore/obj/Debug/net8.0/EcommerceCouponLibrary.Providers.EfCore.GeneratedMSBuildEditorConfig.editorconfig
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.EfCore/obj/Debug/net8.0/EcommerceCouponLibrary.Providers.EfCore.AssemblyInfoInputs.cache
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.EfCore/obj/Debug/net8.0/EcommerceCouponLibrary.Providers.EfCore.AssemblyInfo.cs
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.EfCore/obj/Debug/net8.0/EcommerceCouponLibrary.Providers.EfCore.csproj.CoreCompileInputs.cache
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.EfCore/obj/Debug/net8.0/EcommerceCouponLibrary.Providers.EfCore.sourcelink.json
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.EfCore/obj/Debug/net8.0/EcommerceCouponLibrary.Providers.EfCore.csproj.CopyComplete
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.EfCore/obj/Debug/net8.0/EcommerceCouponLibrary.Providers.EfCore.dll
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.EfCore/obj/Debug/net8.0/refint/EcommerceCouponLibrary.Providers.EfCore.dll
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.EfCore/obj/Debug/net8.0/EcommerceCouponLibrary.Providers.EfCore.pdb
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.EfCore/obj/Debug/net8.0/ref/EcommerceCouponLibrary.Providers.EfCore.dll

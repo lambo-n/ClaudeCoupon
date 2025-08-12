@@ -1,0 +1,264 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Infrastructure/EcommerceCouponLibrary.Infrastructure.csproj": {}
+  },
+  "projects": {
+    "/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Application/EcommerceCouponLibrary.Application.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Application/EcommerceCouponLibrary.Application.csproj",
+        "projectName": "EcommerceCouponLibrary.Application",
+        "projectPath": "/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Application/EcommerceCouponLibrary.Application.csproj",
+        "packagesPath": "/home/lambo/.nuget/packages/",
+        "outputPath": "/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Application/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/lambo/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Core/EcommerceCouponLibrary.Core.csproj": {
+                "projectPath": "/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Core/EcommerceCouponLibrary.Core.csproj"
+              },
+              "/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Domain/EcommerceCouponLibrary.Domain.csproj": {
+                "projectPath": "/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Domain/EcommerceCouponLibrary.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "FluentValidation": {
+              "target": "Package",
+              "version": "[11.8.1, )"
+            },
+            "Microsoft.Extensions.DependencyInjection.Abstractions": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.Extensions.Logging.Abstractions": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.117/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Core/EcommerceCouponLibrary.Core.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Core/EcommerceCouponLibrary.Core.csproj",
+        "projectName": "EcommerceCouponLibrary.Core",
+        "projectPath": "/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Core/EcommerceCouponLibrary.Core.csproj",
+        "packagesPath": "/home/lambo/.nuget/packages/",
+        "outputPath": "/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Core/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/lambo/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.117/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Domain/EcommerceCouponLibrary.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Domain/EcommerceCouponLibrary.Domain.csproj",
+        "projectName": "EcommerceCouponLibrary.Domain",
+        "projectPath": "/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Domain/EcommerceCouponLibrary.Domain.csproj",
+        "packagesPath": "/home/lambo/.nuget/packages/",
+        "outputPath": "/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Domain/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/lambo/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "System.ComponentModel.Annotations": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.117/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Infrastructure/EcommerceCouponLibrary.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Infrastructure/EcommerceCouponLibrary.Infrastructure.csproj",
+        "projectName": "EcommerceCouponLibrary.Infrastructure",
+        "projectPath": "/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Infrastructure/EcommerceCouponLibrary.Infrastructure.csproj",
+        "packagesPath": "/home/lambo/.nuget/packages/",
+        "outputPath": "/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Infrastructure/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/lambo/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Application/EcommerceCouponLibrary.Application.csproj": {
+                "projectPath": "/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Application/EcommerceCouponLibrary.Application.csproj"
+              },
+              "/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Domain/EcommerceCouponLibrary.Domain.csproj": {
+                "projectPath": "/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Domain/EcommerceCouponLibrary.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.Extensions.Configuration.Abstractions": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.Extensions.Options.ConfigurationExtensions": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.117/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

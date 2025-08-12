@@ -13,10 +13,12 @@ namespace EcommerceCouponLibrary.Core.Services
     public class CouponEvaluator : ICouponEvaluator
     {
         private readonly ICouponRepository _couponRepository;
+        private readonly ICustomerEligibilityService? _customerEligibility;
 
-        public CouponEvaluator(ICouponRepository couponRepository)
+        public CouponEvaluator(ICouponRepository couponRepository, ICustomerEligibilityService? customerEligibility = null)
         {
             _couponRepository = couponRepository ?? throw new ArgumentNullException(nameof(couponRepository));
+            _customerEligibility = customerEligibility;
         }
 
         /// <summary>
@@ -56,6 +58,20 @@ namespace EcommerceCouponLibrary.Core.Services
             if (!validationResult.IsSuccess)
             {
                 return validationResult;
+            }
+
+            // Stacking rules: prevent combining when either coupon is non-combinable
+            if (order.AppliedCoupons.Any())
+            {
+                var existingHasNonCombinable = order.AppliedCoupons.Any(ac => !ac.Coupon.IsCombinable);
+                if (!coupon.IsCombinable || existingHasNonCombinable)
+                {
+                    return CouponApplicationResult.Failure(
+                        coupon,
+                        CouponRejectionReason.CannotCombine,
+                        "This coupon cannot be combined with other coupons."
+                    );
+                }
             }
 
             // Calculate the discount
@@ -334,6 +350,20 @@ namespace EcommerceCouponLibrary.Core.Services
                 );
             }
 
+            // Allowed currencies restriction
+            if (coupon.AllowedCurrencies != null && coupon.AllowedCurrencies.Length > 0)
+            {
+                bool allowed = Array.Exists(coupon.AllowedCurrencies, c => string.Equals(c, order.CurrencyCode, StringComparison.OrdinalIgnoreCase));
+                if (!allowed)
+                {
+                    return CouponApplicationResult.Failure(
+                        coupon,
+                        CouponRejectionReason.CurrencyMismatch,
+                        $"This coupon is only valid for {string.Join(", ", coupon.AllowedCurrencies)} orders."
+                    );
+                }
+            }
+
             // Check minimum order amount
             if (coupon.MinimumOrderAmount.HasValue && order.Subtotal < coupon.MinimumOrderAmount.Value)
             {
@@ -343,6 +373,50 @@ namespace EcommerceCouponLibrary.Core.Services
                     CouponRejectionReason.BelowMinimum,
                     $"Order must be at least {coupon.MinimumOrderAmount.Value} to use this coupon. Add {remaining} more to your cart."
                 );
+            }
+
+            // Check geo restriction
+            if (coupon.AllowedCountries != null && coupon.AllowedCountries.Length > 0)
+            {
+                bool allowed = Array.Exists(coupon.AllowedCountries, c => string.Equals(c, order.CountryCode, StringComparison.OrdinalIgnoreCase));
+                if (!allowed)
+                {
+                    return CouponApplicationResult.Failure(
+                        coupon,
+                        CouponRejectionReason.CustomerNotEligible,
+                        "This coupon is not available in your region."
+                    );
+                }
+            }
+
+            // Customer first-order / group eligibility
+            if (_customerEligibility != null)
+            {
+                if (coupon.RequireFirstOrder)
+                {
+                    var isFirst = await _customerEligibility.IsFirstOrderAsync(customerId);
+                    if (!isFirst)
+                    {
+                        return CouponApplicationResult.Failure(
+                            coupon,
+                            CouponRejectionReason.CustomerNotEligible,
+                            "This coupon is for first-time orders only."
+                        );
+                    }
+                }
+
+                if (coupon.AllowedCustomerGroups != null && coupon.AllowedCustomerGroups.Length > 0)
+                {
+                    var inGroup = await _customerEligibility.IsInAllowedGroupsAsync(customerId, coupon.AllowedCustomerGroups);
+                    if (!inGroup)
+                    {
+                        return CouponApplicationResult.Failure(
+                            coupon,
+                            CouponRejectionReason.CustomerNotEligible,
+                            "You are not eligible for this coupon."
+                        );
+                    }
+                }
             }
 
             // Check global usage limit
@@ -406,13 +480,27 @@ namespace EcommerceCouponLibrary.Core.Services
                 };
             }
 
-            var eligibleSubtotal = eligibleItems.Sum(item => item.TotalPrice.Amount);
-            var discountAmount = CalculateDiscountAmount(coupon, eligibleSubtotal);
+            // Determine scope base amount
+            decimal baseAmount = coupon.Scope switch
+            {
+                DiscountScope.OrderTotal => eligibleItems.Sum(item => item.TotalPrice.Amount) + order.ShippingAmount.Amount + order.TaxAmount.Amount,
+                _ => eligibleItems.Sum(item => item.TotalPrice.Amount)
+            };
+
+            var discountAmount = CalculateDiscountAmount(coupon, baseAmount);
 
             // Apply maximum discount cap if specified
             if (coupon.MaximumDiscountAmount.HasValue)
             {
                 discountAmount = Money.Min(discountAmount, coupon.MaximumDiscountAmount.Value);
+            }
+
+            // Free shipping coupon overrides shipping amount discount
+            if (coupon.Type == CouponType.FreeShipping)
+            {
+                discountAmount = Money.Min(order.ShippingAmount, Money.Create(discountAmount.Amount, order.CurrencyCode));
+                var freeShipLines = new List<LineDiscount>();
+                return new DiscountCalculation { DiscountAmount = discountAmount, LineDiscounts = freeShipLines };
             }
 
             // Allocate the discount across eligible items proportionally
@@ -438,8 +526,16 @@ namespace EcommerceCouponLibrary.Core.Services
         /// </summary>
         private bool IsItemEligible(Coupon coupon, OrderItem item)
         {
-            // For now, all items are eligible
-            // This will be extended in future epics for product/category targeting
+            // Exclusions
+            if (coupon.ExcludeSaleItems && item.IsOnSale) return false;
+            if (coupon.ExcludeGiftCards && item.IsGiftCard) return false;
+
+            // Inclusions (if specified)
+            if (coupon.IncludedCategories != null && coupon.IncludedCategories.Length > 0)
+            {
+                return coupon.IncludedCategories.Contains(item.Category, StringComparer.OrdinalIgnoreCase);
+            }
+
             return true;
         }
 
@@ -454,6 +550,7 @@ namespace EcommerceCouponLibrary.Core.Services
             {
                 CouponType.Percentage => eligibleSubtotalMoney * coupon.Value,
                 CouponType.FixedAmount => Money.Min(coupon.FixedAmount!.Value, eligibleSubtotalMoney),
+                CouponType.FreeShipping => eligibleSubtotalMoney,
                 _ => throw new InvalidOperationException($"Unknown coupon type: {coupon.Type}")
             };
         }

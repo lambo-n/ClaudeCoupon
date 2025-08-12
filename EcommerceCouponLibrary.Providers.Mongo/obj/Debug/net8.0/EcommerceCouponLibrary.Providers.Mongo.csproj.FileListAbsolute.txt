@@ -1,0 +1,16 @@
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.Mongo/bin/Debug/net8.0/EcommerceCouponLibrary.Providers.Mongo.deps.json
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.Mongo/bin/Debug/net8.0/EcommerceCouponLibrary.Providers.Mongo.dll
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.Mongo/bin/Debug/net8.0/EcommerceCouponLibrary.Providers.Mongo.pdb
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.Mongo/bin/Debug/net8.0/EcommerceCouponLibrary.Core.dll
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.Mongo/bin/Debug/net8.0/EcommerceCouponLibrary.Core.pdb
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.Mongo/obj/Debug/net8.0/EcommerceCouponLibrary.Providers.Mongo.csproj.AssemblyReference.cache
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.Mongo/obj/Debug/net8.0/EcommerceCouponLibrary.Providers.Mongo.GeneratedMSBuildEditorConfig.editorconfig
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.Mongo/obj/Debug/net8.0/EcommerceCouponLibrary.Providers.Mongo.AssemblyInfoInputs.cache
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.Mongo/obj/Debug/net8.0/EcommerceCouponLibrary.Providers.Mongo.AssemblyInfo.cs
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.Mongo/obj/Debug/net8.0/EcommerceCouponLibrary.Providers.Mongo.csproj.CoreCompileInputs.cache
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.Mongo/obj/Debug/net8.0/EcommerceCouponLibrary.Providers.Mongo.sourcelink.json
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.Mongo/obj/Debug/net8.0/EcommerceCouponLibrary.Providers.Mongo.csproj.CopyComplete
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.Mongo/obj/Debug/net8.0/EcommerceCouponLibrary.Providers.Mongo.dll
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.Mongo/obj/Debug/net8.0/refint/EcommerceCouponLibrary.Providers.Mongo.dll
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.Mongo/obj/Debug/net8.0/EcommerceCouponLibrary.Providers.Mongo.pdb
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Providers.Mongo/obj/Debug/net8.0/ref/EcommerceCouponLibrary.Providers.Mongo.dll

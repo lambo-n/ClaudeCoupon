@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "ZBXZ6rNPD9EFzUWG/KY1nuzklX2TKJHDk3gkeGdKYhKQhoS2e1vHTdnSnAyPKiGYxoedDeX4X+c4s+bnLHJgzA==",
+  "success": true,
+  "projectFilePath": "/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Shared/EcommerceCouponLibrary.Shared.csproj",
+  "expectedPackageFiles": [
+    "/home/lambo/.nuget/packages/microsoft.netcore.platforms/1.1.0/microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "/home/lambo/.nuget/packages/microsoft.netcore.targets/1.1.0/microsoft.netcore.targets.1.1.0.nupkg.sha512",
+    "/home/lambo/.nuget/packages/system.globalization/4.3.0/system.globalization.4.3.0.nupkg.sha512",
+    "/home/lambo/.nuget/packages/system.runtime/4.3.0/system.runtime.4.3.0.nupkg.sha512"
+  ],
+  "logs": []
+}

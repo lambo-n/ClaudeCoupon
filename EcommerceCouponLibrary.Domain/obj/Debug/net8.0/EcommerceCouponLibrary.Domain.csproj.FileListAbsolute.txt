@@ -1,0 +1,12 @@
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Domain/bin/Debug/net8.0/EcommerceCouponLibrary.Domain.deps.json
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Domain/bin/Debug/net8.0/EcommerceCouponLibrary.Domain.dll
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Domain/bin/Debug/net8.0/EcommerceCouponLibrary.Domain.pdb
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Domain/obj/Debug/net8.0/EcommerceCouponLibrary.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Domain/obj/Debug/net8.0/EcommerceCouponLibrary.Domain.AssemblyInfoInputs.cache
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Domain/obj/Debug/net8.0/EcommerceCouponLibrary.Domain.AssemblyInfo.cs
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Domain/obj/Debug/net8.0/EcommerceCouponLibrary.Domain.csproj.CoreCompileInputs.cache
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Domain/obj/Debug/net8.0/EcommerceCouponLibrary.Domain.sourcelink.json
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Domain/obj/Debug/net8.0/EcommerceCouponLibrary.Domain.dll
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Domain/obj/Debug/net8.0/refint/EcommerceCouponLibrary.Domain.dll
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Domain/obj/Debug/net8.0/EcommerceCouponLibrary.Domain.pdb
+/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Domain/obj/Debug/net8.0/ref/EcommerceCouponLibrary.Domain.dll

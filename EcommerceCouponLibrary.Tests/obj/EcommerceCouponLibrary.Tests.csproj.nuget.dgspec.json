@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/lambo/Documents/VSCode/Coupon/EcommerceCouponLibrary.Tests/EcommerceCouponLibrary.Tests.csproj": {}
+    "/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Tests/EcommerceCouponLibrary.Tests.csproj": {}
   },
   "projects": {
-    "/home/lambo/Documents/VSCode/Coupon/EcommerceCouponLibrary.Core/EcommerceCouponLibrary.Core.csproj": {
+    "/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Core/EcommerceCouponLibrary.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/lambo/Documents/VSCode/Coupon/EcommerceCouponLibrary.Core/EcommerceCouponLibrary.Core.csproj",
+        "projectUniqueName": "/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Core/EcommerceCouponLibrary.Core.csproj",
         "projectName": "EcommerceCouponLibrary.Core",
-        "projectPath": "/home/lambo/Documents/VSCode/Coupon/EcommerceCouponLibrary.Core/EcommerceCouponLibrary.Core.csproj",
+        "projectPath": "/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Core/EcommerceCouponLibrary.Core.csproj",
         "packagesPath": "/home/lambo/.nuget/packages/",
-        "outputPath": "/home/lambo/Documents/VSCode/Coupon/EcommerceCouponLibrary.Core/obj/",
+        "outputPath": "/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Core/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/lambo/.nuget/NuGet/NuGet.Config"
@@ -57,14 +57,14 @@
         }
       }
     },
-    "/home/lambo/Documents/VSCode/Coupon/EcommerceCouponLibrary.Tests/EcommerceCouponLibrary.Tests.csproj": {
+    "/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Tests/EcommerceCouponLibrary.Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/lambo/Documents/VSCode/Coupon/EcommerceCouponLibrary.Tests/EcommerceCouponLibrary.Tests.csproj",
+        "projectUniqueName": "/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Tests/EcommerceCouponLibrary.Tests.csproj",
         "projectName": "EcommerceCouponLibrary.Tests",
-        "projectPath": "/home/lambo/Documents/VSCode/Coupon/EcommerceCouponLibrary.Tests/EcommerceCouponLibrary.Tests.csproj",
+        "projectPath": "/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Tests/EcommerceCouponLibrary.Tests.csproj",
         "packagesPath": "/home/lambo/.nuget/packages/",
-        "outputPath": "/home/lambo/Documents/VSCode/Coupon/EcommerceCouponLibrary.Tests/obj/",
+        "outputPath": "/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Tests/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/lambo/.nuget/NuGet/NuGet.Config"
@@ -79,8 +79,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/home/lambo/Documents/VSCode/Coupon/EcommerceCouponLibrary.Core/EcommerceCouponLibrary.Core.csproj": {
-                "projectPath": "/home/lambo/Documents/VSCode/Coupon/EcommerceCouponLibrary.Core/EcommerceCouponLibrary.Core.csproj"
+              "/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Core/EcommerceCouponLibrary.Core.csproj": {
+                "projectPath": "/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Core/EcommerceCouponLibrary.Core.csproj"
               }
             }
           }

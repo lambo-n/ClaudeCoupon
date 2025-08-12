@@ -299,6 +299,7 @@ namespace EcommerceCouponLibrary.Tests
             Assert.True(result.IsSuccess);
             Assert.Equal(coupon, result.Coupon);
             Assert.Equal(Money.USD(100.00m), result.DiscountAmount); // Capped at subtotal
+            Assert.NotNull(result.OrderTotals);
             Assert.Equal(Money.USD(0.00m), result.OrderTotals.FinalTotal); // Total becomes zero
         }
 
@@ -323,6 +324,7 @@ namespace EcommerceCouponLibrary.Tests
             Assert.True(result.IsSuccess);
             Assert.Equal(coupon, result.Coupon);
             Assert.Equal(Money.USD(25.00m), result.DiscountAmount); // Capped at $25 instead of $50
+            Assert.NotNull(result.OrderTotals);
             Assert.Equal(Money.USD(75.00m), result.OrderTotals.FinalTotal);
         }
 
@@ -348,36 +350,9 @@ namespace EcommerceCouponLibrary.Tests
             Assert.Equal(Money.USD(0.00m), result.DiscountAmount); // No discount applied during validation
         }
 
-        [Fact]
-        public void RemoveCoupon_ExistingCoupon_RemovesSuccessfully()
-        {
-            // Arrange
-            var coupon = Coupon.CreatePercentageCoupon(
-                "SAVE10",
-                "10% Off",
-                0.10m,
-                DateTime.UtcNow.AddDays(-1),
-                DateTime.UtcNow.AddDays(30)
-            );
-            _testOrder.ApplyCoupon(coupon, Money.USD(10.00m));
 
-            // Act
-            var result = _evaluator.RemoveCoupon(_testOrder, coupon.Id);
 
-            // Assert
-            Assert.True(result);
-            Assert.Empty(_testOrder.AppliedCoupons);
-        }
 
-        [Fact]
-        public void RemoveCoupon_NonExistentCoupon_ReturnsFalse()
-        {
-            // Act
-            var result = _evaluator.RemoveCoupon(_testOrder, Guid.NewGuid());
-
-            // Assert
-            Assert.False(result);
-        }
 
         [Fact]
         public void GetOrderTotals_NoCoupons_ReturnsCorrectTotals()
@@ -412,6 +387,246 @@ namespace EcommerceCouponLibrary.Tests
             Assert.Equal(Money.USD(100.00m), totals.Subtotal);
             Assert.Equal(Money.USD(10.00m), totals.TotalDiscount);
             Assert.Equal(Money.USD(90.00m), totals.FinalTotal);
+        }
+
+        // U-002 Tests: Change or remove a coupon
+        [Fact]
+        public void RemoveCoupon_ExistingCoupon_RemovesSuccessfully()
+        {
+            // Arrange
+            var coupon = Coupon.CreatePercentageCoupon(
+                "SAVE10",
+                "10% Off",
+                0.10m,
+                DateTime.UtcNow.AddDays(-1),
+                DateTime.UtcNow.AddDays(30)
+            );
+            _testOrder.ApplyCoupon(coupon, Money.USD(10.00m));
+
+            // Act
+            var result = _evaluator.RemoveCoupon(_testOrder, coupon.Id);
+
+            // Assert
+            Assert.True(result.IsSuccess);
+            Assert.Equal(coupon, result.Coupon);
+            Assert.Equal(Money.USD(0.00m), result.DiscountAmount);
+            Assert.Equal("Coupon '10% Off' has been removed. Your total has been updated.", result.Message);
+            Assert.NotNull(result.OrderTotals);
+            Assert.Equal(Money.USD(100.00m), result.OrderTotals.Subtotal);
+            Assert.Equal(Money.USD(0.00m), result.OrderTotals.TotalDiscount);
+            Assert.Equal(Money.USD(100.00m), result.OrderTotals.FinalTotal);
+            Assert.Empty(_testOrder.AppliedCoupons);
+        }
+
+        [Fact]
+        public void RemoveCoupon_NonExistentCoupon_ReturnsFailure()
+        {
+            // Act
+            var result = _evaluator.RemoveCoupon(_testOrder, Guid.NewGuid());
+
+            // Assert
+            Assert.False(result.IsSuccess);
+            Assert.Null(result.Coupon);
+            Assert.Equal(CouponRejectionReason.NotFound, result.RejectionReason);
+            Assert.Equal("The specified coupon was not found on this order.", result.Message);
+        }
+
+        [Fact]
+        public async Task ReplaceCoupon_ValidReplacement_ReplacesSuccessfully()
+        {
+            // Arrange
+            var originalCoupon = Coupon.CreatePercentageCoupon(
+                "SAVE10",
+                "10% Off",
+                0.10m,
+                DateTime.UtcNow.AddDays(-1),
+                DateTime.UtcNow.AddDays(30)
+            );
+            var newCoupon = Coupon.CreateFixedAmountCoupon(
+                "SAVE15",
+                "$15 Off",
+                15.00m,
+                "USD",
+                DateTime.UtcNow.AddDays(-1),
+                DateTime.UtcNow.AddDays(30)
+            );
+            
+            _testOrder.ApplyCoupon(originalCoupon, Money.USD(10.00m));
+            ((InMemoryCouponRepository)_repository).AddCoupon(newCoupon);
+
+            // Act
+            var result = await _evaluator.ReplaceCouponAsync(_testOrder, originalCoupon.Id, "SAVE15", "test-customer-123");
+
+            // Assert
+            Assert.True(result.IsSuccess);
+            Assert.Equal(newCoupon, result.Coupon);
+            Assert.Equal(Money.USD(15.00m), result.DiscountAmount);
+            Assert.Contains("Coupon '10% Off' was replaced with '$15 Off'", result.Message);
+            Assert.Contains("New savings: 15.00 USD", result.Message);
+            Assert.NotNull(result.OrderTotals);
+            Assert.Equal(Money.USD(100.00m), result.OrderTotals.Subtotal);
+            Assert.Equal(Money.USD(15.00m), result.OrderTotals.TotalDiscount);
+            Assert.Equal(Money.USD(85.00m), result.OrderTotals.FinalTotal);
+            Assert.Single(_testOrder.AppliedCoupons);
+            Assert.Equal(newCoupon.Id, _testOrder.AppliedCoupons[0].Coupon.Id);
+        }
+
+        [Fact]
+        public async Task ReplaceCoupon_InvalidNewCoupon_RestoresOriginalCoupon()
+        {
+            // Arrange
+            var originalCoupon = Coupon.CreatePercentageCoupon(
+                "SAVE10",
+                "10% Off",
+                0.10m,
+                DateTime.UtcNow.AddDays(-1),
+                DateTime.UtcNow.AddDays(30)
+            );
+            _testOrder.ApplyCoupon(originalCoupon, Money.USD(10.00m));
+
+            // Act
+            var result = await _evaluator.ReplaceCouponAsync(_testOrder, originalCoupon.Id, "INVALID", "test-customer-123");
+
+            // Assert
+            Assert.False(result.IsSuccess);
+            Assert.Equal(CouponRejectionReason.NotFound, result.RejectionReason);
+            Assert.Contains("Failed to apply new coupon", result.Message);
+            Assert.Contains("Original coupon has been restored", result.Message);
+            Assert.Single(_testOrder.AppliedCoupons);
+            Assert.Equal(originalCoupon.Id, _testOrder.AppliedCoupons[0].Coupon.Id);
+            Assert.Equal(Money.USD(10.00m), _testOrder.AppliedCoupons[0].DiscountAmount);
+        }
+
+        [Fact]
+        public async Task ReplaceCoupon_NonExistentOriginalCoupon_ReturnsFailure()
+        {
+            // Arrange
+            var newCoupon = Coupon.CreateFixedAmountCoupon(
+                "SAVE15",
+                "$15 Off",
+                15.00m,
+                "USD",
+                DateTime.UtcNow.AddDays(-1),
+                DateTime.UtcNow.AddDays(30)
+            );
+            ((InMemoryCouponRepository)_repository).AddCoupon(newCoupon);
+
+            // Act
+            var result = await _evaluator.ReplaceCouponAsync(_testOrder, Guid.NewGuid(), "SAVE15", "test-customer-123");
+
+            // Assert
+            Assert.False(result.IsSuccess);
+            Assert.Null(result.Coupon);
+            Assert.Equal(CouponRejectionReason.NotFound, result.RejectionReason);
+            Assert.Equal("The specified coupon was not found on this order.", result.Message);
+            Assert.Empty(_testOrder.AppliedCoupons);
+        }
+
+        [Fact]
+        public async Task ReplaceCoupon_ExpiredNewCoupon_RestoresOriginalCoupon()
+        {
+            // Arrange
+            var originalCoupon = Coupon.CreatePercentageCoupon(
+                "SAVE10",
+                "10% Off",
+                0.10m,
+                DateTime.UtcNow.AddDays(-1),
+                DateTime.UtcNow.AddDays(30)
+            );
+            var expiredCoupon = Coupon.CreateFixedAmountCoupon(
+                "EXPIRED",
+                "Expired Coupon",
+                15.00m,
+                "USD",
+                DateTime.UtcNow.AddDays(-30),
+                DateTime.UtcNow.AddDays(-1)
+            );
+            
+            _testOrder.ApplyCoupon(originalCoupon, Money.USD(10.00m));
+            ((InMemoryCouponRepository)_repository).AddCoupon(expiredCoupon);
+
+            // Act
+            var result = await _evaluator.ReplaceCouponAsync(_testOrder, originalCoupon.Id, "EXPIRED", "test-customer-123");
+
+            // Assert
+            Assert.False(result.IsSuccess);
+            Assert.Equal(expiredCoupon, result.Coupon);
+            Assert.Equal(CouponRejectionReason.Expired, result.RejectionReason);
+            Assert.Contains("Failed to apply new coupon", result.Message);
+            Assert.Contains("Original coupon has been restored", result.Message);
+            Assert.Single(_testOrder.AppliedCoupons);
+            Assert.Equal(originalCoupon.Id, _testOrder.AppliedCoupons[0].Coupon.Id);
+        }
+
+        [Fact]
+        public async Task ReplaceCoupon_BetterDiscount_AppliesNewCoupon()
+        {
+            // Arrange
+            var originalCoupon = Coupon.CreatePercentageCoupon(
+                "SAVE10",
+                "10% Off",
+                0.10m,
+                DateTime.UtcNow.AddDays(-1),
+                DateTime.UtcNow.AddDays(30)
+            );
+            var betterCoupon = Coupon.CreatePercentageCoupon(
+                "SAVE20",
+                "20% Off",
+                0.20m,
+                DateTime.UtcNow.AddDays(-1),
+                DateTime.UtcNow.AddDays(30)
+            );
+            
+            _testOrder.ApplyCoupon(originalCoupon, Money.USD(10.00m));
+            ((InMemoryCouponRepository)_repository).AddCoupon(betterCoupon);
+
+            // Act
+            var result = await _evaluator.ReplaceCouponAsync(_testOrder, originalCoupon.Id, "SAVE20", "test-customer-123");
+
+            // Assert
+            Assert.True(result.IsSuccess);
+            Assert.Equal(betterCoupon, result.Coupon);
+            Assert.Equal(Money.USD(20.00m), result.DiscountAmount);
+            Assert.Contains("Coupon '10% Off' was replaced with '20% Off'", result.Message);
+            Assert.Contains("New savings: 20.00 USD", result.Message);
+            Assert.NotNull(result.OrderTotals);
+            Assert.Equal(Money.USD(80.00m), result.OrderTotals.FinalTotal);
+        }
+
+        [Fact]
+        public async Task ReplaceCoupon_WorseDiscount_StillAppliesNewCoupon()
+        {
+            // Arrange
+            var originalCoupon = Coupon.CreatePercentageCoupon(
+                "SAVE20",
+                "20% Off",
+                0.20m,
+                DateTime.UtcNow.AddDays(-1),
+                DateTime.UtcNow.AddDays(30)
+            );
+            var worseCoupon = Coupon.CreateFixedAmountCoupon(
+                "SAVE5",
+                "$5 Off",
+                5.00m,
+                "USD",
+                DateTime.UtcNow.AddDays(-1),
+                DateTime.UtcNow.AddDays(30)
+            );
+            
+            _testOrder.ApplyCoupon(originalCoupon, Money.USD(20.00m));
+            ((InMemoryCouponRepository)_repository).AddCoupon(worseCoupon);
+
+            // Act
+            var result = await _evaluator.ReplaceCouponAsync(_testOrder, originalCoupon.Id, "SAVE5", "test-customer-123");
+
+            // Assert
+            Assert.True(result.IsSuccess);
+            Assert.Equal(worseCoupon, result.Coupon);
+            Assert.Equal(Money.USD(5.00m), result.DiscountAmount);
+            Assert.Contains("Coupon '20% Off' was replaced with '$5 Off'", result.Message);
+            Assert.Contains("New savings: 5.00 USD", result.Message);
+            Assert.NotNull(result.OrderTotals);
+            Assert.Equal(Money.USD(95.00m), result.OrderTotals.FinalTotal);
         }
     }
 }

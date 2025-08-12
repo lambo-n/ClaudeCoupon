@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/lambo/Documents/VSCode/Coupon/EcommerceCouponLibrary.Core/EcommerceCouponLibrary.Core.csproj",
+      "projectUniqueName": "/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Core/EcommerceCouponLibrary.Core.csproj",
       "projectName": "EcommerceCouponLibrary.Core",
-      "projectPath": "/home/lambo/Documents/VSCode/Coupon/EcommerceCouponLibrary.Core/EcommerceCouponLibrary.Core.csproj",
+      "projectPath": "/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Core/EcommerceCouponLibrary.Core.csproj",
       "packagesPath": "/home/lambo/.nuget/packages/",
-      "outputPath": "/home/lambo/Documents/VSCode/Coupon/EcommerceCouponLibrary.Core/obj/",
+      "outputPath": "/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Core/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/lambo/.nuget/NuGet/NuGet.Config"

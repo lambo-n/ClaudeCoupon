@@ -123,18 +123,103 @@ namespace EcommerceCouponLibrary.Core.Services
         /// </summary>
         /// <param name="order">The order to remove the coupon from</param>
         /// <param name="couponId">The ID of the coupon to remove</param>
-        /// <returns>True if the coupon was removed, false otherwise</returns>
-        public bool RemoveCoupon(Order order, Guid couponId)
+        /// <returns>The result of the coupon removal</returns>
+        public CouponApplicationResult RemoveCoupon(Order order, Guid couponId)
         {
             if (order == null)
                 throw new ArgumentNullException(nameof(order));
 
             var appliedCoupon = order.AppliedCoupons.FirstOrDefault(ac => ac.Coupon.Id == couponId);
             if (appliedCoupon == null)
-                return false;
+            {
+                return CouponApplicationResult.Failure(
+                    null,
+                    CouponRejectionReason.NotFound,
+                    "The specified coupon was not found on this order."
+                );
+            }
 
+            // Store coupon info before removal
+            var removedCoupon = appliedCoupon.Coupon;
+            var removedDiscount = appliedCoupon.DiscountAmount;
+
+            // Remove the coupon
             order.RemoveCoupon(couponId);
-            return true;
+
+            // Get updated order totals
+            var orderTotals = GetOrderTotals(order);
+
+            return CouponApplicationResult.Success(
+                removedCoupon,
+                Money.Zero(order.CurrencyCode), // No discount after removal
+                orderTotals,
+                new List<LineDiscount>(),
+                $"Coupon '{removedCoupon.Name}' has been removed. Your total has been updated."
+            );
+        }
+
+        /// <summary>
+        /// Replaces an existing coupon with a new one
+        /// </summary>
+        /// <param name="order">The order to replace the coupon on</param>
+        /// <param name="existingCouponId">The ID of the existing coupon to remove</param>
+        /// <param name="newCouponCode">The new coupon code to apply</param>
+        /// <param name="customerId">The customer ID</param>
+        /// <returns>The result of the coupon replacement</returns>
+        public async Task<CouponApplicationResult> ReplaceCouponAsync(Order order, Guid existingCouponId, string newCouponCode, string customerId)
+        {
+            if (order == null)
+                throw new ArgumentNullException(nameof(order));
+
+            if (string.IsNullOrWhiteSpace(newCouponCode))
+                throw new ArgumentException("New coupon code cannot be null or empty", nameof(newCouponCode));
+
+            if (string.IsNullOrWhiteSpace(customerId))
+                throw new ArgumentException("Customer ID cannot be null or empty", nameof(customerId));
+
+            // First, remove the existing coupon
+            var existingCoupon = order.AppliedCoupons.FirstOrDefault(ac => ac.Coupon.Id == existingCouponId);
+            if (existingCoupon == null)
+            {
+                return CouponApplicationResult.Failure(
+                    null,
+                    CouponRejectionReason.NotFound,
+                    "The specified coupon was not found on this order."
+                );
+            }
+
+            // Store the existing coupon info for the result
+            var removedCoupon = existingCoupon.Coupon;
+            var removedDiscount = existingCoupon.DiscountAmount;
+
+            // Remove the existing coupon
+            order.RemoveCoupon(existingCouponId);
+
+            // Now apply the new coupon
+            var newCouponResult = await ApplyCouponAsync(order, newCouponCode, customerId);
+
+            // If the new coupon application failed, we need to restore the original coupon
+            if (!newCouponResult.IsSuccess)
+            {
+                // Restore the original coupon
+                order.ApplyCoupon(removedCoupon, removedDiscount);
+
+                // Return a failure result with information about both the removal and the failed application
+                return CouponApplicationResult.Failure(
+                    newCouponResult.Coupon,
+                    newCouponResult.RejectionReason ?? CouponRejectionReason.Unknown,
+                    $"Failed to apply new coupon: {newCouponResult.Message}. Original coupon has been restored."
+                );
+            }
+
+            // Success - return the new coupon result with additional context
+            return CouponApplicationResult.Success(
+                newCouponResult.Coupon!,
+                newCouponResult.DiscountAmount,
+                newCouponResult.OrderTotals!,
+                newCouponResult.LineDiscounts,
+                $"Coupon '{removedCoupon.Name}' was replaced with '{newCouponResult.Coupon!.Name}'. New savings: {newCouponResult.DiscountAmount}"
+            );
         }
 
         /// <summary>

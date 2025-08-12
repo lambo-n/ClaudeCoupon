@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "/GOAh+BgkXPHsdWlx5qr1+vi1UtWAqMcLy4RM4e2GFv6cjeN1HNVUw3HovfLKOVxRZEXkLuineCkrASZxUD52Q==",
+  "dgSpecHash": "GWQsj7EnnN95cVwU2W9E7eTx0prVBNgztmYtYEXLDwiOnPRgUJnfTIP4Wk/5Xo7bS5SgIO/Q2pJPytfezWdz/Q==",
   "success": true,
-  "projectFilePath": "/home/lambo/Documents/VSCode/Coupon/EcommerceCouponLibrary.Tests/EcommerceCouponLibrary.Tests.csproj",
+  "projectFilePath": "/home/lambo/Documents/VSCode/ClaudeCoupon/EcommerceCouponLibrary.Tests/EcommerceCouponLibrary.Tests.csproj",
   "expectedPackageFiles": [
     "/home/lambo/.nuget/packages/coverlet.collector/6.0.0/coverlet.collector.6.0.0.nupkg.sha512",
     "/home/lambo/.nuget/packages/microsoft.codecoverage/17.6.0/microsoft.codecoverage.17.6.0.nupkg.sha512",

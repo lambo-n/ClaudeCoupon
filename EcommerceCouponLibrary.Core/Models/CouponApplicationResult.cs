@@ -50,8 +50,9 @@ namespace EcommerceCouponLibrary.Core.Models
         /// <param name="discountAmount">The discount amount</param>
         /// <param name="orderTotals">The order totals</param>
         /// <param name="lineDiscounts">Line-level discounts</param>
+        /// <param name="customMessage">Optional custom message (if null, default message is used)</param>
         /// <returns>A successful result</returns>
-        public static CouponApplicationResult Success(Coupon coupon, Money discountAmount, OrderTotals orderTotals, List<LineDiscount> lineDiscounts)
+        public static CouponApplicationResult Success(Coupon coupon, Money discountAmount, OrderTotals orderTotals, List<LineDiscount> lineDiscounts, string? customMessage = null)
         {
             return new CouponApplicationResult
             {
@@ -60,7 +61,7 @@ namespace EcommerceCouponLibrary.Core.Models
                 DiscountAmount = discountAmount,
                 OrderTotals = orderTotals,
                 LineDiscounts = lineDiscounts,
-                Message = $"Coupon '{coupon.Name}' applied successfully! You saved {discountAmount}."
+                Message = customMessage ?? $"Coupon '{coupon.Name}' applied successfully! You saved {discountAmount}."
             };
         }
 
@@ -204,6 +205,11 @@ namespace EcommerceCouponLibrary.Core.Models
         /// Currency mismatch
         /// </summary>
         CurrencyMismatch,
+
+        /// <summary>
+        /// Coupon replacement failed
+        /// </summary>
+        ReplacementFailed,
 
         /// <summary>
         /// Unknown error

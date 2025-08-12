@@ -1,0 +1,11 @@
+/home/lambo/Documents/VSCode/Coupon/EcommerceCouponLibrary.Core/obj/Debug/net8.0/EcommerceCouponLibrary.Core.GeneratedMSBuildEditorConfig.editorconfig
+/home/lambo/Documents/VSCode/Coupon/EcommerceCouponLibrary.Core/obj/Debug/net8.0/EcommerceCouponLibrary.Core.AssemblyInfoInputs.cache
+/home/lambo/Documents/VSCode/Coupon/EcommerceCouponLibrary.Core/obj/Debug/net8.0/EcommerceCouponLibrary.Core.AssemblyInfo.cs
+/home/lambo/Documents/VSCode/Coupon/EcommerceCouponLibrary.Core/obj/Debug/net8.0/EcommerceCouponLibrary.Core.csproj.CoreCompileInputs.cache
+/home/lambo/Documents/VSCode/Coupon/EcommerceCouponLibrary.Core/bin/Debug/net8.0/EcommerceCouponLibrary.Core.deps.json
+/home/lambo/Documents/VSCode/Coupon/EcommerceCouponLibrary.Core/bin/Debug/net8.0/EcommerceCouponLibrary.Core.dll
+/home/lambo/Documents/VSCode/Coupon/EcommerceCouponLibrary.Core/bin/Debug/net8.0/EcommerceCouponLibrary.Core.pdb
+/home/lambo/Documents/VSCode/Coupon/EcommerceCouponLibrary.Core/obj/Debug/net8.0/EcommerceCouponLibrary.Core.dll
+/home/lambo/Documents/VSCode/Coupon/EcommerceCouponLibrary.Core/obj/Debug/net8.0/refint/EcommerceCouponLibrary.Core.dll
+/home/lambo/Documents/VSCode/Coupon/EcommerceCouponLibrary.Core/obj/Debug/net8.0/EcommerceCouponLibrary.Core.pdb
+/home/lambo/Documents/VSCode/Coupon/EcommerceCouponLibrary.Core/obj/Debug/net8.0/ref/EcommerceCouponLibrary.Core.dll
